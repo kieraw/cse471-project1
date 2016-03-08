@@ -101,7 +101,12 @@ bool CWaveInstrumentFactory::LoadFile(const char *filename)
 
 void CWaveInstrumentFactory::ChangePitch(double rate)
 {
+	double sample = 0.0;
 
+	double	inbetween = fmod(sample, 1);
+	short output = (1. - inbetween) * m_wave[int(sample)] + inbetween * m_wave[int(sample) + 1];
+
+	sample += rate;
 }
 
 void CWaveInstrumentFactory::Glissando(double rate)

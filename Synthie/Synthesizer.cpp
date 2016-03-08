@@ -66,6 +66,12 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			instrument = new CToneInstrument(GetBPM());
 		}
+		else if (note->Instrument() == L"Wave")
+		{
+			m_waveinstfactory.SetNote(note);
+			instrument = m_waveinstfactory.CreateInstrument();
+		}
+
 
 		// Configure the instrument object
 		if (instrument != NULL)

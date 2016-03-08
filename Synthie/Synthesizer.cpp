@@ -25,6 +25,7 @@ CSynthesizer::~CSynthesizer()
 //! Start the synthesizer
 void CSynthesizer::Start(void)
 {
+	//
 	m_instruments.clear();
 	m_currentNote = 0;
 	m_measure = 0;

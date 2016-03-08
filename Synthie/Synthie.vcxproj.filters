@@ -75,13 +75,28 @@
     <ClCompile Include="CAR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WavePlayer.cpp">
+    <ClCompile Include="AdditiveInstrument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleWave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AdditiveWave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Envelope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADSREnvelope.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WaveInstrument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WaveInstrumentFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WavePlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,13 +170,28 @@
     <ClInclude Include="CAR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WavePlayer.h">
+    <ClInclude Include="AdditiveInstrument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AdditiveWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Envelope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADSREnvelope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WaveInstrument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WaveInstrumentFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WavePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

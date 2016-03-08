@@ -73,6 +73,11 @@ bool CSynthesizer::Generate(double * frame)
 		}
 
 
+		if (note->Instrument() == L"AdditiveInstrument")
+		{
+			instrument = new CAdditiveInstrument(GetBPM());
+		}
+
 		// Configure the instrument object
 		if (instrument != NULL)
 		{

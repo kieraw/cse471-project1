@@ -4,6 +4,9 @@
 #include "Instrument.h"
 #include "ToneInstrument.h"
 #include "Note.h"
+#include "AdditiveInstrument.h"
+
+
 #include <list>
 #include <vector>
 #include <iostream>

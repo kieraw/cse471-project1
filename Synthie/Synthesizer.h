@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "WaveInstrumentFactory.h"
 
 using namespace std;
 
@@ -62,9 +63,11 @@ private:
 	int m_currentNote;          //!< The current note we are playing
 	int m_measure;              //!< The current measure
 	double m_beat;              //!< The current beat within the measure
+	CWaveInstrumentFactory m_waveinstfactory;
 
 private:
 	void XmlLoadScore(IXMLDOMNode * xml);
 	void XmlLoadInstrument(IXMLDOMNode * xml);
 	void XmlLoadNote(IXMLDOMNode * xml, std::wstring & instrument);
+	
 };

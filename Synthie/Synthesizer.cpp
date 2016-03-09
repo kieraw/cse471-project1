@@ -71,7 +71,10 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			instrument = new CAdditiveInstrument(GetBPM());
 		}
-
+		else if (note->Instrument() == L"SubtractiveInstrument")
+		{
+			instrument = new CSubtractiveInstrument(GetBPM());
+		}
 		else if (note->Instrument() == L"Wave")
 		{
 			m_waveinstfactory.SetNote(note);

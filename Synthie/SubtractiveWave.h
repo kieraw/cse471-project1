@@ -18,9 +18,11 @@ public:
 	vector<double> GetHarmonics() { return m_harmonics; }
 
 	//Setters
+	void SetWaveType(wstring type){ m_wave_type = type; }
 	void SetWavetables();
 
 private:
+	wstring m_wave_type; //square, sawtooth, triange?
 	// need the harmonics
 	vector<double> m_harmonics;
 	// keep track of time

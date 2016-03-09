@@ -16,13 +16,14 @@ public:
 	//Setters
 	void SetFreq(double freq) { mSubtractiveWave.SetFreq(freq); }
 	void SetAmplitude(double amp) { mSubtractiveWave.SetAmp(amp); }
+	void SetWaveType(wstring type){ mSubtractiveWave.SetWaveType(type); }
 	void SetDuration(double d) { m_duration = d; }
 
 private:
+	wstring m_wave_type; //square, sawtooth, triange?
 	double m_duration;
 	double m_time;
 	CSubtractiveWave mSubtractiveWave;
-
 
 };
 

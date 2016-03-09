@@ -5,7 +5,7 @@
 #include "ToneInstrument.h"
 #include "Note.h"
 #include "AdditiveInstrument.h"
-
+#include "SubtractiveInstrument.h"
 
 #include <list>
 #include <vector>

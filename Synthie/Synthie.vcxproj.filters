@@ -99,10 +99,16 @@
     <ClCompile Include="WavePlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Filter.cpp">
+    <ClCompile Include="AmpFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AmpFilter.cpp">
+    <ClCompile Include="SubtractiveInstrument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubtractiveWave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,10 +206,16 @@
     <ClInclude Include="WavePlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Filter.h">
+    <ClInclude Include="AmpFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AmpFilter.h">
+    <ClInclude Include="SubtractiveInstrument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubtractiveWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

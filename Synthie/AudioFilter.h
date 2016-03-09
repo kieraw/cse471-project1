@@ -1,5 +1,5 @@
 /**
-* \file Filter.h
+* \file AudioFilter.h
 *
 * \author Kiera Wheatley
 *
@@ -11,12 +11,12 @@
 
 class CEnvelope;
 
-class CFilter :
+class CAudioFilter :
 	public CAudioNode
 {
 public:
-	CFilter();
-	virtual ~CFilter();
+	CAudioFilter();
+	virtual ~CAudioFilter();
 
 	// SETTERS
 	void SetEnvelope(CEnvelope* envelope) { m_envelope = envelope; }

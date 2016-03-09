@@ -136,7 +136,7 @@
     <ClCompile Include="audio\DirSoundStream.cpp" />
     <ClCompile Include="CAR.cpp" />
     <ClCompile Include="Envelope.cpp" />
-    <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="AudioFilter.cpp" />
     <ClCompile Include="Instrument.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Note.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="audio\DirSoundStream.h" />
     <ClInclude Include="CAR.h" />
     <ClInclude Include="Envelope.h" />
-    <ClInclude Include="Filter.h" />
+    <ClInclude Include="AudioFilter.h" />
     <ClInclude Include="Instrument.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Note.h" />

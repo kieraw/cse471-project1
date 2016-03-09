@@ -7,14 +7,14 @@
 */
 
 #include "stdafx.h"
-#include "Filter.h"
+#include "AudioFilter.h"
 
 
-CFilter::CFilter()
+CAudioFilter::CAudioFilter()
 {
 }
 
 
-CFilter::~CFilter()
+CAudioFilter::~CAudioFilter()
 {
 }

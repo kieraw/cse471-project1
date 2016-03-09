@@ -7,10 +7,10 @@
 */
 
 #pragma once
-#include "Filter.h"
+#include "AudioFilter.h"
 
 class CAmpFilter :
-	public CFilter
+	public CAudioFilter
 {
 public:
 	CAmpFilter();

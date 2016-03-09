@@ -20,9 +20,14 @@ public:
 	virtual bool Generate() override;
 
 	// SETTERS
+
+	// set attack length
 	void SetAttack(double attack) { m_attack = attack; }
+	// set decay length
 	void SetDecay(double decay) { m_decay = decay; }
+	// set the sustain level
 	void SetSustain(double sustain) { m_sustain = sustain; }
+	// set release length
 	void SetRelease(double release) { m_release = release; }
 
 private:

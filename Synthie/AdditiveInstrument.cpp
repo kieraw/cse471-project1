@@ -40,6 +40,8 @@ void CAdditiveInstrument::Start()
 	m_additive_wave.SetSampleRate(GetSampleRate());
 	m_additive_wave.Start();
 	m_time = 0;
+
+	//m_envelope = new CADSREnvelope();
 }
 
 
@@ -50,6 +52,18 @@ bool CAdditiveInstrument::Generate()
 
 
 void CAdditiveInstrument::SetNote(CNote *note)
+{
+
+}
+
+
+void CAdditiveInstrument::SetNextNote(CNote* next_note)
+{
+
+}
+
+
+void CAdditiveInstrument::AddHarmonics(wstring harmonics)
 {
 
 }

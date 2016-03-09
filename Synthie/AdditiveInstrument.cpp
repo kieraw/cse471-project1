@@ -41,13 +41,23 @@ void CAdditiveInstrument::Start()
 	m_additive_wave.Start();
 	m_time = 0;
 
-	//m_envelope = new CADSREnvelope();
+	m_envelope = new CADSREnvelope();
+	static_cast<CADSREnvelope*>(m_envelope)->SetAttack(.05);
+	static_cast<CADSREnvelope*>(m_envelope)->SetRelease(.05);
+
+	m_amp_filter.SetEnvelope(m_envelope);
+	m_amp_filter.SetSource(&m_additive_wave);
+	m_amp_filter.SetSampleRate(GetSampleRate());
+	m_amp_filter.SetDuration(m_duration);
+	m_amp_filter.Start();
 }
 
 
 bool CAdditiveInstrument::Generate()
 {
-	return false;
+	// m_envelope->Generate();
+
+	return true;
 }
 
 

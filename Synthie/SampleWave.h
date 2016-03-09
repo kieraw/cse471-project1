@@ -20,14 +20,14 @@ public:
 	// GETTERS
 
 	// get the size of the wave table
-	double GetWavetableSize() { return mWavetable.size(); }
+	double GetWavetableSize() { return m_wavetable.size(); }
 	// get the frequency
 	double GetFreq() { return m_freq; }
 	// get the amplitude
 	double GetAmp() { return m_amp; }
 	// get the phase
 	double GetPhase() { return m_phase; }
-	// get the filter
+	// get the filter (flag)
 	bool GetFilter() { return m_filter; }
 
 	// SETTERS
@@ -40,10 +40,10 @@ public:
 	virtual void SetWavetables() = 0;
 
 protected:
-	std::vector<double> mWavetable;  // wave table
+	std::vector<double> m_wavetable;  // wave table
 	double m_freq; // frequency
 	double m_amp;  // amplitude
-	double m_phase;  // phase
-	bool m_filter;  // filter
+	int m_phase;  // phase
+	bool m_filter;  // filter?
 };
 

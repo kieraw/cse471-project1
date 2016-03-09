@@ -147,6 +147,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SubtractiveInstrument.cpp" />
+    <ClCompile Include="SubtractiveWave.cpp" />
     <ClCompile Include="Synthesizer.cpp" />
     <ClCompile Include="Synthie.cpp" />
     <ClCompile Include="SynthieView.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="SampleWave.h" />
     <ClInclude Include="SineWave.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SubtractiveInstrument.h" />
+    <ClInclude Include="SubtractiveWave.h" />
     <ClInclude Include="Synthesizer.h" />
     <ClInclude Include="Synthie.h" />
     <ClInclude Include="SynthieView.h" />

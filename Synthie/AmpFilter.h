@@ -16,7 +16,9 @@ public:
 	CAmpFilter();
 	virtual ~CAmpFilter();
 
+	//! Start the node generation
 	virtual void Start() override;
+	//! Cause one sample to be generated
 	virtual bool Generate() override;
 };
 

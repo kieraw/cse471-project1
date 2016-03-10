@@ -70,6 +70,13 @@ bool CSynthesizer::Generate(double * frame)
 		else if (note->Instrument() == L"AdditiveInstrument")
 		{
 			instrument = new CAdditiveInstrument(GetBPM());
+
+			// used for note overlapping, do this if required
+			// apparent in cross fading
+			if ((m_currentNote + 1) < m_notes.size())
+			{
+				static_cast<CAdditiveInstrument*>(instrument)->SetNextNote(&m_notes[m_currentNote + 1]);
+			}
 		}
 		else if (note->Instrument() == L"SubtractiveInstrument")
 		{

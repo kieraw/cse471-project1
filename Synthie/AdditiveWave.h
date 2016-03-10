@@ -26,17 +26,23 @@ public:
 		double vibrato_rate = 0;
 	};
 
+	//! Start the node generation
 	virtual void Start() override;
+	//! Cause one sample to be generated
 	virtual bool Generate() override;
+	// set the wave tables for harmonics and vibrato 
 	virtual void SetWavetables() override;
 
+	// add a harmonic to the vector of harmonics
 	void AddHarmonic(double harmonic) { m_harmonics.push_back(harmonic); }
+	// adjust sample to match number of harmonics
 	void ImplementHarmonics(double* sample, double time);
+	// adjust sample to implement vibrato sound
 	void ImplementVibrato(double* sine_rads, double* vibrato_rads);
+	// generates a cross fade effect on a sample 
 	void GenerateCrossfade(double time, double crossfade_dur);
 
 	// GETTERS
-
 	vector<double> GetHarmonics() { return m_harmonics; }
 	bool GetVibratoFlag() { return m_implement_vibrato; }
 	bool GetCrossfadeFlag() { return m_implement_crossfade; }
@@ -55,7 +61,7 @@ public:
 	void SetNextWave(CAdditiveWave* next) { m_next_wave = next; }
 
 private:
-	// need the harmonics
+	// list of harmonics
 	vector<double> m_harmonics;
 	// keep track of time
 	double m_time;

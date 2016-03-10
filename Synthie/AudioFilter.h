@@ -24,9 +24,13 @@ public:
 	void SetDuration(double duration) { m_duration = duration; }
 
 protected:
+	// source of the audio node
 	CAudioNode* m_source;
+	// envelope object
 	CEnvelope* m_envelope;
+	// audio duration
 	double m_duration;
+	// keep track of time
 	double m_time;
 };
 

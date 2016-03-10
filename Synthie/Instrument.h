@@ -14,7 +14,9 @@ public:
 	virtual void SetNote(CNote *note) = 0;
 
 protected:
+	// the amplitude filter object
 	CAmpFilter m_amp_filter;
+	// the envelope object
 	CEnvelope* m_envelope;
 };
 

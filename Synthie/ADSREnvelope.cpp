@@ -61,6 +61,7 @@ bool CADSREnvelope::Generate()
 		m_level = m_sustain;
 	}
 
+	// update the time
 	m_time += GetSamplePeriod();
 
 	return m_duration > m_time;

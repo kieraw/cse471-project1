@@ -16,7 +16,9 @@ public:
 	CADSREnvelope();
 	virtual ~CADSREnvelope();
 
+	//! Start the node generation
 	virtual void Start() override;
+	//! Cause one sample to be generated
 	virtual bool Generate() override;
 
 	// SETTERS

@@ -36,8 +36,10 @@ void CAdditiveWave::Start()
 
 bool CAdditiveWave::Generate()
 {
+	// set the frames
 	m_frame[0] = m_wavetable[m_phase];
 	m_frame[1] = m_frame[0];
+	// set the phase
 	m_phase = (m_phase + 1) % m_wavetable.size();
 
 	return true;
@@ -46,7 +48,9 @@ bool CAdditiveWave::Generate()
 
 void CAdditiveWave::SetWavetables()
 {
+	// set the table size to the sample rate
 	auto table_size = GetSampleRate();
+	// resize the wave table
 	m_wavetable.resize(table_size);
 
 	// sine and vibrato radians
@@ -55,9 +59,10 @@ void CAdditiveWave::SetWavetables()
 
 	for (auto i = 0; i < table_size; i++, m_time += 1. / GetSampleRate())
 	{
+		// set the sample
 		auto sample = sin(sine_rads) * m_amp;
 
-		// harmonics
+		// check if there are harmonics
 		if (m_harmonics.size() > 0)
 		{
 			ImplementHarmonics(&sample, m_time);
@@ -69,6 +74,7 @@ void CAdditiveWave::SetWavetables()
 			ImplementVibrato(&sine_rads, &vibrato_rads);
 		}
 
+		// set each index in the wave table to the sample
 		m_wavetable[i] = sample;
 	}
 }
@@ -76,9 +82,10 @@ void CAdditiveWave::SetWavetables()
 
 void CAdditiveWave::ImplementHarmonics(double* sample, double time)
 {
-	// Nyquist Frequency
+	// Nyquist Frequency = sample rate / 2
 	auto nyquist_freq = GetSampleRate() / 2;
 
+	// go until the end of the harmonics (vector)
 	for (auto x = 0; x < m_harmonics.size() && (m_freq * (x + 1)) < nyquist_freq; x++)
 	{
 		// adjust to match the harmonic number
@@ -90,15 +97,52 @@ void CAdditiveWave::ImplementHarmonics(double* sample, double time)
 }
 
 
-void CAdditiveWave::GenerateCrossfade(double time, double crossfade_dur)
+void CAdditiveWave::ImplementVibrato(double* sine_rads, double* vibrato_rads)
 {
-	auto elapsed_time = time - m_crossfade_start_time;
+	// sine wave
+	double sample = short(m_amp * sin(*sine_rads));
+	// rate
+	double diff = sin(*vibrato_rads) * m_vibrato_effect.vibrato;
 
-
+	// increment phases
+	// save the sine radians and vibrato radians in memory
+	*sine_rads += (2 * PI * (m_freq + diff)) / m_sampleRate;
+	*vibrato_rads += (2 * PI * m_vibrato_effect.vibrato_rate) / m_sampleRate;
 }
 
 
-void CAdditiveWave::ImplementVibrato(double* sine_rads, double* vibrato_rads)
+void CAdditiveWave::GenerateCrossfade(double time, double crossfade_dur)
 {
-	
+	// time of the cross fade elapsed
+	auto elapsed_time = time - m_crossfade_start_time;
+	// next sample
+	double next_sample[2];
+	// current sample
+	double current_sample[2];
+	// in-between sample
+	double interpolated_sample;
+
+	if (m_next_wave != nullptr && m_phase < m_next_wave->GetWavetableSize() && m_phase < GetWavetableSize())
+	{
+		// next
+		next_sample[0] = next_sample[1] = m_next_wave->m_wavetable[m_phase];
+		// current
+		current_sample[0] = current_sample[1] = m_wavetable[m_phase];
+		// in-between
+		interpolated_sample = current_sample[0] * ((crossfade_dur - elapsed_time) / crossfade_dur) +
+			next_sample[0] * (elapsed_time / crossfade_dur);
+
+		// update frame
+		m_frame[0] = m_frame[1] = interpolated_sample;
+	}
+
+	else
+	{
+		// update frames
+		m_frame[0] = m_wavetable[m_phase];
+		m_frame[1] = m_frame[0];
+	}
+
+	// set the phase
+	m_phase = (m_phase + 1) % m_wavetable.size();
 }

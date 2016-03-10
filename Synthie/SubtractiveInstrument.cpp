@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "SubtractiveInstrument.h"
 #include "Notes.h"
-
+#include "Envelope.h"
+#include "ADSREnvelope.h"
 CSubtractiveInstrument::CSubtractiveInstrument()
 {
 	m_duration = 0.1;
@@ -80,11 +81,39 @@ void CSubtractiveInstrument::Start()
 	mSubtractiveWave.SetSampleRate(GetSampleRate());
 	mSubtractiveWave.Start();
 	m_time = 0;
+
+	// create a new envelope object
+	m_envelope = new CADSREnvelope();
+	// set the attack and release of the ADSR envelope
+	static_cast<CADSREnvelope*>(m_envelope)->SetAttack(.05);
+	static_cast<CADSREnvelope*>(m_envelope)->SetRelease(.05);
+
+	// set the envelope of the filter
+	m_amp_filter.SetEnvelope(m_envelope);
+	// set the source to be the additive wave object
+	m_amp_filter.SetSource(&mSubtractiveWave);
+	// set the sample rate
+	m_amp_filter.SetSampleRate(GetSampleRate());
+	// set the duration
+	m_amp_filter.SetDuration(m_duration);
+	m_amp_filter.Start();
 }
 bool CSubtractiveInstrument::Generate()
 {
+	// begin envelope generation
+	m_envelope->Generate();
+
 	mSubtractiveWave.Generate();
-	return true;
+
+	auto continuePlay = m_amp_filter.Generate();
+
+	m_frame[0] = mSubtractiveWave.Frame(0);
+	m_frame[1] = mSubtractiveWave.Frame(1);
+
+	// update the time
+	m_time += GetSamplePeriod();
+
+	return continuePlay;
 }
 
 

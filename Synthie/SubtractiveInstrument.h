@@ -24,6 +24,6 @@ private:
 	double m_duration;
 	double m_time;
 	CSubtractiveWave mSubtractiveWave;
-
+	
 };
 

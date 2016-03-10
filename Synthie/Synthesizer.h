@@ -12,6 +12,10 @@
 #include <iostream>
 #include <algorithm>
 #include "WaveInstrumentFactory.h"
+#include "ChorusEffect.h"
+#include "FlangeEffect.h"
+#include "ReverberationEffect.h"
+#include "NoiseGateEffect.h"
 
 using namespace std;
 
@@ -69,5 +73,12 @@ private:
 	void XmlLoadScore(IXMLDOMNode * xml);
 	void XmlLoadInstrument(IXMLDOMNode * xml);
 	void XmlLoadNote(IXMLDOMNode * xml, std::wstring & instrument);
+
+private:
+	//! Effects
+	CChorusEffect mChorusEffect;
+	CFlangeEffect mFlangeEffect;
+	CReverberationEffect mReverbEffect;
+	CNoiseGateEffect mNoiseGateEffect;
 	
 };

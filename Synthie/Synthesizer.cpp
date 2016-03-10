@@ -15,6 +15,7 @@ CSynthesizer::CSynthesizer()
 	m_bpm = 120;
 	m_secperbeat = 0.5;
 	m_beatspermeasure = 4;
+	m_time = 0;
 }
 
 
@@ -36,6 +37,9 @@ void CSynthesizer::Start(void)
 //! Generate one audio frame
 bool CSynthesizer::Generate(double * frame)
 {
+	// Which effects will be sent for this frame
+	bool sends[5] = { true, false, false, false, false };
+
 	//
 	// Phase 1: Determine if any notes need to be played.
 	//
@@ -80,6 +84,12 @@ bool CSynthesizer::Generate(double * frame)
 			m_waveinstfactory.SetNote(note);
 			instrument = m_waveinstfactory.CreateInstrument();
 		}
+		else if (note->Instrument() == L"Chorus")
+		{
+			sends[1] = true;
+			mChorusEffect.SetNote(note);
+			mChorusEffect.Start();
+		}
 
 		// Configure the instrument object
 		if (instrument != NULL)
@@ -97,6 +107,16 @@ bool CSynthesizer::Generate(double * frame)
 	//
 	// Phase 2: Clear all channels to silence 
 	//
+
+	// From the tips and questions for effects
+	double channelframes[5][2];
+	for (int i = 0; i < 5; i++)
+	{
+		for (int c = 0; c < GetNumChannels(); c++)
+		{
+			channelframes[i][c] = 0;
+		}
+	}
 
 	for (int c = 0; c<GetNumChannels(); c++)
 	{
@@ -129,10 +149,18 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			// If we returned true, we have a valid sample.  Add it 
 			// to the frame.
-			for (int c = 0; c<GetNumChannels(); c++)
+			/*for (int c = 0; c<GetNumChannels(); c++)
 			{
-				frame[c] += instrument->Frame(c);
+			frame[c] += instrument->Frame(c);
+			}*/
+			for (int i = 0; i < 5; i++)
+			{
+				for (int c = 0; c < GetNumChannels(); c++)
+				{
+					channelframes[i][c] += instrument->Frame(c) * (sends[i] ? 1 : 0);
+				}
 			}
+
 		}
 		else
 		{
@@ -141,6 +169,50 @@ bool CSynthesizer::Generate(double * frame)
 			m_instruments.erase(node);
 			delete instrument;
 		}
+
+		//
+		// Phase 3a: Effects!
+		//
+
+		double frames[2];
+		for (int i = 0; i < GetNumChannels(); i++)
+		{
+			frames[i] = channelframes[0][i];
+		}
+
+		double chorusframes[2], flangeframes[2], reverbframes[2], noisegateframes[2];
+		for (int i = 0; i < 2; i++)
+		{
+			chorusframes[i] = flangeframes[i] = reverbframes[i] = noisegateframes[i] = 0;
+		}
+		
+		if (channelframes[1][0] != 0)
+		{
+			mChorusEffect.Process(channelframes[1], chorusframes, m_time);
+		}
+		/*else if (channelframes[2][0] != 0)
+		{
+			mFlangeEffect.Process(channelframes[2], flangeframes, m_time);
+		}
+		else if (channelframes[3][0] != 0)
+		{
+			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
+		}
+		else if (channelframes[4][0] != 0)
+		{
+			mNoiseGateEffect.Process(channelframes[4], noisegateframes, m_time);
+		}*/
+
+		for (int i = 0; i < GetNumChannels(); i++)
+		{
+			frame[i] += frames[i];
+			frame[i] += chorusframes[i];
+			frame[i] += flangeframes[i];
+			frame[i] += reverbframes[i];
+			frame[i] += noisegateframes[i];
+		}
+
+
 
 		// Move to the next instrument in the list
 		node = next;

@@ -6,5 +6,11 @@ class CNoiseGateEffect :
 public:
 	CNoiseGateEffect();
 	virtual ~CNoiseGateEffect();
+
+	virtual void Process(double *input, double *output, double time) override;
+
+	virtual void Start() override;
+
+	virtual bool Generate() override;
 };
 

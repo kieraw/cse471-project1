@@ -55,8 +55,7 @@ void CAdditiveInstrument::Start()
 
 bool CAdditiveInstrument::Generate()
 {
-	// m_envelope->Generate();
-
+	 //m_envelope->Generate();
 	return true;
 }
 

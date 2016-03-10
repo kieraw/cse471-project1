@@ -83,7 +83,8 @@ void CSubtractiveInstrument::Start()
 }
 bool CSubtractiveInstrument::Generate()
 {
-	return false;
+	mSubtractiveWave.Generate();
+	return true;
 }
 
 

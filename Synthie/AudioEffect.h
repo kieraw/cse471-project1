@@ -38,7 +38,7 @@ protected:
 
 	std::vector<short> mQueue;
 
-private:
 	const int MAXQUEUESIZE = 200000;
+	const double M_PI = 3.14159265359;
 };
 

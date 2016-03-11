@@ -38,7 +38,7 @@ void CSynthesizer::Start(void)
 bool CSynthesizer::Generate(double * frame)
 {
 	// Which effects will be sent for this frame
-	bool sends[5] = { true, false, false, false, false };
+	bool sends[] = { false, false, false, false };
 
 	//
 	// Phase 1: Determine if any notes need to be played.
@@ -93,9 +93,15 @@ bool CSynthesizer::Generate(double * frame)
 		}
 		else if (note->Instrument() == L"Chorus")
 		{
-			sends[1] = true;
+			sends[0] = true;
 			mChorusEffect.SetNote(note);
 			mChorusEffect.Start();
+		}
+		else if (note->Instrument() == L"Flange")
+		{
+			sends[1] = true;
+			mFlangeEffect.SetNote(note);
+			mFlangeEffect.Start();
 		}
 
 		// Configure the instrument object
@@ -160,11 +166,19 @@ bool CSynthesizer::Generate(double * frame)
 			{
 			frame[c] += instrument->Frame(c);
 			}*/
+			for (int i = 0; i < 4; i++)
+			{
+				if (sends[i])
+				{
+					instrument->SetSend(i+1, i*i);
+				}
+			}
+
 			for (int i = 0; i < 5; i++)
 			{
 				for (int c = 0; c < GetNumChannels(); c++)
 				{
-					channelframes[i][c] += instrument->Frame(c) * (sends[i] ? 1 : 0);
+					channelframes[i][c] += instrument->Frame(c) * instrument->Send(i);
 				}
 			}
 
@@ -197,11 +211,11 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			mChorusEffect.Process(channelframes[1], chorusframes, m_time);
 		}
-		/*else if (channelframes[2][0] != 0)
+		else if (channelframes[2][0] != 0)
 		{
 			mFlangeEffect.Process(channelframes[2], flangeframes, m_time);
 		}
-		else if (channelframes[3][0] != 0)
+		/*else if (channelframes[3][0] != 0)
 		{
 			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
 		}

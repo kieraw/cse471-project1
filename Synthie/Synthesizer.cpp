@@ -103,6 +103,18 @@ bool CSynthesizer::Generate(double * frame)
 			mFlangeEffect.SetNote(note);
 			mFlangeEffect.Start();
 		}
+		else if (note->Instrument() == L"Reverb")
+		{
+			sends[2] = true;
+			mReverbEffect.SetNote(note);
+			mReverbEffect.Start();
+		}
+		else if (note->Instrument() == L"NoiseGate")
+		{
+			sends[3] = true;
+			mNoiseGateEffect.SetNote(note);
+			mNoiseGateEffect.Start();
+		}
 
 		// Configure the instrument object
 		if (instrument != NULL)
@@ -170,7 +182,7 @@ bool CSynthesizer::Generate(double * frame)
 			{
 				if (sends[i])
 				{
-					instrument->SetSend(i+1, i*i);
+					instrument->SetSend(i+1, 1 + i * .5);
 				}
 			}
 
@@ -215,11 +227,11 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			mFlangeEffect.Process(channelframes[2], flangeframes, m_time);
 		}
-		/*else if (channelframes[3][0] != 0)
+		else if (channelframes[3][0] != 0)
 		{
 			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
 		}
-		else if (channelframes[4][0] != 0)
+		/*else if (channelframes[4][0] != 0)
 		{
 			mNoiseGateEffect.Process(channelframes[4], noisegateframes, m_time);
 		}*/

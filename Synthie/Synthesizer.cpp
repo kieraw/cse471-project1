@@ -231,10 +231,10 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
 		}
-		/*else if (channelframes[4][0] != 0)
+		else if (channelframes[4][0] != 0)
 		{
 			mNoiseGateEffect.Process(channelframes[4], noisegateframes, m_time);
-		}*/
+		}
 
 		for (int i = 0; i < GetNumChannels(); i++)
 		{

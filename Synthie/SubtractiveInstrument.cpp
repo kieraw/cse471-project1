@@ -71,6 +71,18 @@ void CSubtractiveInstrument::SetNote(CNote *note)
 				SetWaveType(L"Triangle");
 			}
 		}
+		else if (name == "resonFreq") //Setting either a resonFreq or bandwidth indicates you want a reson filter. 
+		{                             //If one or the other is not supplied, they assume default values
+			mSubtractiveWave.SetReson(true);
+			value.ChangeType(VT_R8);
+			mSubtractiveWave.SetResonFreq(value.dblVal);
+		}
+		else if (name == "bandwidth")
+		{
+			mSubtractiveWave.SetReson(true);
+			value.ChangeType(VT_R8);
+			mSubtractiveWave.SetResonBandwidth(value.dblVal);
+		}
 	}
 	
 }

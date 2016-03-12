@@ -12,20 +12,24 @@ public:
 	void Start();
 	bool Generate();
 
-	void AddHarmonic(double harmonic) { m_harmonics.push_back(harmonic); }
-
-	//Getters
-	vector<double> GetHarmonics() { return m_harmonics; }
+	void ImplementReson(double* sample, int tableIndex);
 
 	//Setters
 	void SetWaveType(wstring type){ m_wave_type = type; }
+	void SetReson(bool reson){ m_implement_reson = reson; }
+	void SetResonFreq(double freq){ m_reson_freq = freq; }
+	void SetResonBandwidth(double band){ m_reson_bandwidth = band; }
 	void SetWavetables();
 
 private:
 	wstring m_wave_type; //square, sawtooth, triange?
-	// need the harmonics
-	vector<double> m_harmonics;
 	// keep track of time
 	double m_time;
+	//Apply Reson?
+	bool m_implement_reson = false;
+	//emphasized reson frequency, has default value
+	double m_reson_freq = 0.01134;
+	//emphasized reson bandwidth, has default value
+	double m_reson_bandwidth = 0.01;
 };
 

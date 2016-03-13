@@ -91,6 +91,11 @@ bool CSynthesizer::Generate(double * frame)
 			m_waveinstfactory.SetNote(note);
 			instrument = m_waveinstfactory.CreateInstrument();
 		}
+		else if (note->Instrument() == L"PianoInstrument")
+		{
+			m_waveinstfactory.SetNote(note);
+			instrument = m_waveinstfactory.CreateInstrument();
+		}
 		else if (note->Instrument() == L"Chorus")
 		{
 			sends[0] = true;

@@ -16,6 +16,7 @@
 #include "FlangeEffect.h"
 #include "ReverberationEffect.h"
 #include "NoiseGateEffect.h"
+#include "PianoInstrument.h"
 
 using namespace std;
 

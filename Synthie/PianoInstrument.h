@@ -14,7 +14,7 @@ public:
 
 public:
 	virtual void Start();
-	virtual bool Generate(){ return true; };
+	virtual bool Generate();
 	virtual void SetNote(CNote *note);
 	/*void SetFreq(double f) { m_sinewave.SetFreq(f); }
 	void SetAmplitude(double a) { m_sinewave.SetAmplitude(a); }*/

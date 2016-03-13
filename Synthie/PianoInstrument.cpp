@@ -62,6 +62,7 @@ bool CPianoInstrument::LoadFile(const char *filename)
 	m_wave.clear();
 
 	CDirSoundSource m_file;
+
 	if (!m_file.Open(filename))
 	{
 		CString msg = L"Unable to open audio file: ";
@@ -77,6 +78,18 @@ bool CPianoInstrument::LoadFile(const char *filename)
 		m_wave.push_back(frame[0]);
 	}
 
+	this->GetPlayer()->SetSamples(&m_wave[0], (int)m_wave.size());
+
 	m_file.Close();
 	return true;
+}
+
+bool CPianoInstrument::Generate()
+{
+	bool valid = m_wavePlayer.Generate();
+
+	m_frame[0] = m_wavePlayer.Frame(0);
+	m_frame[1] = m_frame[0];
+
+	return valid;
 }

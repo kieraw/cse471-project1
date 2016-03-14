@@ -14,5 +14,7 @@ private:
 	double m_duration;
 	double m_volume;
 	bool m_pedal;
+	bool m_playPedalUp;
+	bool m_playPedalDown;
 };
 

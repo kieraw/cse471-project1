@@ -8,6 +8,8 @@ CPianoInstrumentFactory::CPianoInstrumentFactory()
 	m_duration = 1.0;
 	m_volume = 1.0;
 	m_pedal = false;
+	m_playPedalDown = false;
+	m_playPedalUp = false;
 }
 
 
@@ -23,6 +25,15 @@ CPianoInstrument *CPianoInstrumentFactory::CreateInstrument()
 	instrument->SetDuration(m_duration);
 	instrument->SetPedal(m_pedal);
 	instrument->SetVolume(m_volume);
+
+	if (m_playPedalDown){
+		instrument->PlayPedalDown();
+		m_playPedalDown = false;
+	}
+	if (m_playPedalUp){
+		instrument->PlayPedalUp();
+		m_playPedalUp = false;
+	}
 
 	return instrument;
 }
@@ -64,13 +75,15 @@ void CPianoInstrumentFactory::SetNote(CNote *note)
 			string pedal_str(pedal);
 
 			if (pedal_str == "pressed"){
+				m_playPedalDown = true;
 				m_pedal = true;
 			}
 			if (pedal_str == "released"){
+				m_playPedalUp = true;
 				m_pedal = false;
 			}
 		}
-		else if (name == "volume")
+		else if (name == "keydynamic")
 		{
 			value.ChangeType(VT_R8);
 			m_volume = value.dblVal;

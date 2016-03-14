@@ -26,11 +26,15 @@ public:
 	void SetPedal(bool pedal){ m_pedal = pedal; }
 	void SetVolume(double vol){ m_volume = vol; }
 
+	bool PlayPedalDown();
+	bool PlayPedalUp();
+
 	CWavePlayer *GetPlayer() { return &m_wavePlayer; }
 
 private:
 	CWavePlayer m_wavePlayer;
 	std::vector<short> m_wave;
+	std::vector<short> m_pedalWave;
 	double m_duration;
 	double m_time;
 	double m_attack;

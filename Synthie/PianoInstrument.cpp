@@ -6,7 +6,7 @@ using namespace std;
 CPianoInstrument::CPianoInstrument()
 {
 	m_attack = 0.05;
-	m_release = 0.26;
+	m_release = 0.25;
 	m_volume = 1.0;
 	m_duration = 1.0;
 	m_pedal = false;
@@ -100,6 +100,14 @@ bool CPianoInstrument::LoadFile(const char *filename)
 		m_wave.push_back(frame[0]);
 	}
 
+
+	if (m_pedalWave.size() != 0){
+		for (unsigned int j = 0; j < m_pedalWave.size(); j++){
+			m_wave[j] += m_pedalWave[j];
+		}
+		m_pedalWave.clear();
+	}
+	
 	m_file.Close();
 	return true;
 }
@@ -119,7 +127,7 @@ void CPianoInstrument::ChangeDuration()
 {
 	vector<short> changed_wave;
 	double m_time = 0.0;
-	int i = 0;
+	unsigned int i = 0;
 
 	if (m_duration == 0)
 	{
@@ -154,7 +162,7 @@ void CPianoInstrument::Envelope()
 	double m_time = 0.0;
 	double m_duration = m_wave.size() / 44100.;
 
-	for (int i = 0; i < m_wave.size(); i++, m_time += 1 / 44100.)
+	for (unsigned int i = 0; i < m_wave.size(); i++, m_time += 1 / 44100.)
 	{
 		if (m_time < m_attack)
 		{
@@ -168,4 +176,57 @@ void CPianoInstrument::Envelope()
 		output = m_wave[i] * m_ramp * m_volume;
 		m_wave[i] = short(output);
 	}
+}
+
+
+bool CPianoInstrument::PlayPedalDown(){
+
+	CDirSoundSource m_file;
+
+	char filename[] = "waves/piano/pedald.wav";
+	
+
+	if (!m_file.Open(filename))
+	{
+		CString msg = L"Unable to open audio file: ";
+		msg += filename;
+		AfxMessageBox(msg);
+		return false;
+	}
+
+	for (int i = 0; i<m_file.NumSampleFrames(); i++)
+	{
+		short frame[2];
+		m_file.ReadFrame(frame);
+		m_pedalWave.push_back(frame[0]);
+	}
+
+	m_file.Close();
+	return true;
+}
+
+bool CPianoInstrument::PlayPedalUp(){
+
+	CDirSoundSource m_file;
+
+	char filename[] = "waves/piano/pedalu.wav";
+
+
+	if (!m_file.Open(filename))
+	{
+		CString msg = L"Unable to open audio file: ";
+		msg += filename;
+		AfxMessageBox(msg);
+		return false;
+	}
+
+	for (int i = 0; i<m_file.NumSampleFrames(); i++)
+	{
+		short frame[2];
+		m_file.ReadFrame(frame);
+		m_pedalWave.push_back(frame[0]);
+	}
+
+	m_file.Close();
+	return true;
 }

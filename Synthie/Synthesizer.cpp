@@ -221,19 +221,19 @@ bool CSynthesizer::Generate(double * frame)
 		
 		if (channelframes[1][0] != 0)
 		{
-			mChorusEffect.Process(channelframes[1], chorusframes, m_time);
+			mChorusEffect.Process(channelframes[1], chorusframes);
 		}
 		else if (channelframes[2][0] != 0)
 		{
-			mFlangeEffect.Process(channelframes[2], flangeframes, m_time);
+			mFlangeEffect.Process(channelframes[2], flangeframes);
 		}
 		else if (channelframes[3][0] != 0)
 		{
-			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
+			mReverbEffect.Process(channelframes[3], reverbframes);
 		}
 		else if (channelframes[4][0] != 0)
 		{
-			mNoiseGateEffect.Process(channelframes[4], noisegateframes, m_time);
+			mNoiseGateEffect.Process(channelframes[4], noisegateframes);
 		}
 
 		for (int i = 0; i < GetNumChannels(); i++)

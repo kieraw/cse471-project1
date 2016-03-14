@@ -7,7 +7,8 @@
 // Constructor -> Resizes the que to be the max size
 CAudioEffect::CAudioEffect()
 {
-	mQueue.resize(MAXQUEUESIZE);
+	m_queueL.resize(MAXQUEUESIZE);
+	m_queueR.resize(MAXQUEUESIZE);
 }
 
 
@@ -52,6 +53,11 @@ void CAudioEffect::SetNote(CNote *note)
 		{
 			value.ChangeType(VT_R8);
 			SetDelay(value.dblVal);
+		}
+		else if (name == "threshold")
+		{
+			value.ChangeType(VT_R8);
+			SetThreshold(value.dblVal);
 		}
 	}
 }

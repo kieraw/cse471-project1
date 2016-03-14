@@ -12,20 +12,28 @@ CChorusEffect::~CChorusEffect()
 }
 
 
-void CChorusEffect::Process(double* input, double* output, double time)
+void CChorusEffect::Process(double* input, double* output)
 {
-	for (int i = 0; i < 2; i++)
-	{
-		mQueue[mWrloc + i] = input[i];
-		output[i] = mDry * input[i] + mWet * mQueue[(mRdloc + i) % MAXQUEUESIZE];
-	}
 
-	double chorus = 0.025 + sin(0.25 * 2 * M_PI * time) * 0.004;
+	double delayVariance = (RANGE * mDelay) * sin(2 * PI * RATE);
+	double newDelay = mDelay + delayVariance;
 
-	int delaylength = int((chorus * GetSampleRate() + 0.5) + 2);
+	mWrloc = (mWrloc + 1) % 200000;
+	m_queueL[mWrloc] = input[0];
+	m_queueR[mWrloc] = input[1];
 
-	mWrloc = (mWrloc + 2) % MAXQUEUESIZE;
-	mRdloc = (mWrloc + MAXQUEUESIZE - delaylength) % MAXQUEUESIZE;
+	int delayLength = int((newDelay * GetSampleRate() + 0.5)) * 2;
+	int rdloc = (mWrloc + 200000 - delayLength) % 200000;
+
+	// Wet
+	output[0] = input[0] / 2 + m_queueL[rdloc] / 2;
+	output[0] *= mWet;
+	output[1] = input[1] / 2 + m_queueR[rdloc] / 2;
+	output[1] *= mWet;
+
+	// Dry
+	output[0] += input[0] * mDry;
+	output[1] += input[1] * mDry;
 
 }
 

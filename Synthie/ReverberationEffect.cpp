@@ -11,9 +11,9 @@ CReverberationEffect::~CReverberationEffect()
 {
 }
 
-void CReverberationEffect::Process(double* input, double* output, double time)
+void CReverberationEffect::Process(double* input, double* output)
 {
-	for (int c = 0; c<2; c++)
+	/*for (int c = 0; c<2; c++)
 	{
 		mQueue[mWrloc + c] = input[c];
 		output[c] = mDry * input[c] + mWet * mQueue[(mRdloc + c) % MAXQUEUESIZE];
@@ -21,7 +21,7 @@ void CReverberationEffect::Process(double* input, double* output, double time)
 
 
 	mWrloc = (mWrloc + 2) % MAXQUEUESIZE;
-	mRdloc = (mRdloc + 2) % MAXQUEUESIZE;
+	mRdloc = (mRdloc + 2) % MAXQUEUESIZE;*/
 
 }
 

@@ -11,26 +11,38 @@ CFlangeEffect::~CFlangeEffect()
 {
 }
 
-void CFlangeEffect::Process(double* input, double* output, double time)
+void CFlangeEffect::Process(double* input, double* output)
 {
-	for (int i = 0; i < 2; i++)
-	{
-		mQueue[mWrloc + i] = input[i];
-		output[i] = mDry * input[i] + mWet * mQueue[(mRdloc + i) % MAXQUEUESIZE];
-	}
+	double delayVariance = (RANGE * mDelay) * sin(2 * PI * RATE);
+	double newDelay = mDelay + delayVariance;
 
-	double flange = 0.006 + sin(0.25 * 2 * M_PI * time) * 0.004;
+	mWrloc = (mWrloc + 1) % 200000;
+	m_queueL[mWrloc] = input[0];
+	m_queueR[mWrloc] = input[1];
 
-	int delaylength = int((flange*GetSampleRate() + 0.5) * 2);
+	int delayLength = int((newDelay * m_sampleRate + 0.5)) * 2;
+	int rdloc = (mWrloc + 200000 - delayLength) % 200000;
 
-	mWrloc = (mWrloc + 2) % MAXQUEUESIZE;
-	mRdloc = (mWrloc + MAXQUEUESIZE - delaylength) % MAXQUEUESIZE;
+	// Wet
+	output[0] = input[0] / 3 + m_queueL[rdloc] / 3 + (mOutL[rdloc] * LEVEL) / 3;
+	output[0] *= mWet;
+	output[1] = input[1] / 3 + m_queueR[rdloc] / 3 + (mOutR[rdloc] * LEVEL) / 3;
+	output[1] *= mWet;
+
+	// Dry
+	output[0] += input[0] * mDry;
+	output[1] += input[1] * mDry;
+
+	mOutL[mWrloc] = output[0];
+	mOutR[mWrloc] = output[1];
 }
 
 void CFlangeEffect::Start()
 {
 	mWrloc = 0;
 	mRdloc = 0;
+	mOutL.resize(200000);
+	mOutR.resize(200000);
 }
 
 bool CFlangeEffect::Generate()

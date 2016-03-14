@@ -1,9 +1,15 @@
 #include "stdafx.h"
 #include "PianoInstrument.h"
 
+using namespace std;
 
 CPianoInstrument::CPianoInstrument()
 {
+	m_attack = 0.05;
+	m_release = 0.26;
+	m_volume = 1.0;
+	m_duration = 1.0;
+	m_pedal = false;
 }
 
 
@@ -18,7 +24,6 @@ void CPianoInstrument::Start(){
 }
 
 
-//void CPianoInstrument::SetNote(CNote *note)
 void CPianoInstrument::SetNote(CNote *note)
 {
 	// Get a list of all attribute nodes and the
@@ -54,9 +59,26 @@ void CPianoInstrument::SetNote(CNote *note)
 			wcstombs(filename, value.bstrVal, 100);
 			LoadFile(filename);
 		}
+		else if (name == "duration")
+		{
+			value.ChangeType(VT_R8);
+			//Set the duration of the note to be the input duration plus the ramp down time after 
+			//the note has been released
+			SetDuration(value.dblVal + m_release);
+		}
+		
 	}
+
+	if (!m_pedal){
+		ChangeDuration();
+	}
+
+	Envelope();
+	this->GetPlayer()->SetSamples(&m_wave[0], (int)m_wave.size());
 }
 
+
+/* Load the file and create the initial wave table of the note */
 bool CPianoInstrument::LoadFile(const char *filename)
 {
 	m_wave.clear();
@@ -78,8 +100,6 @@ bool CPianoInstrument::LoadFile(const char *filename)
 		m_wave.push_back(frame[0]);
 	}
 
-	this->GetPlayer()->SetSamples(&m_wave[0], (int)m_wave.size());
-
 	m_file.Close();
 	return true;
 }
@@ -92,4 +112,60 @@ bool CPianoInstrument::Generate()
 	m_frame[1] = m_frame[0];
 
 	return valid;
+}
+
+/* Change the duration of the note to be what is supplied in the score*/
+void CPianoInstrument::ChangeDuration()
+{
+	vector<short> changed_wave;
+	double m_time = 0.0;
+	int i = 0;
+
+	if (m_duration == 0)
+	{
+		return;
+	}
+
+	//Create a new wave with the correct number of frames (duration) of the note
+	while (m_time < m_duration)
+	{
+		changed_wave.push_back(m_wave[i]);
+
+		i++;
+		m_time += 1 / 44100.;
+
+		if (i > m_wave.size() - 1)
+		{
+			i = 0;
+		}
+	}
+
+	//Save the changed wave back into the original wave
+	m_wave = changed_wave;
+}
+
+
+
+/* Function to control the attack/release periods of the note */
+void CPianoInstrument::Envelope()
+{
+	double output;
+	double m_ramp;
+	double m_time = 0.0;
+	double m_duration = m_wave.size() / 44100.;
+
+	for (int i = 0; i < m_wave.size(); i++, m_time += 1 / 44100.)
+	{
+		if (m_time < m_attack)
+		{
+			m_ramp = (m_time / m_attack);
+		}
+		if (m_time >(m_duration - m_release))
+		{
+			m_ramp = (m_duration - m_time) / m_release;
+		}
+
+		output = m_wave[i] * m_ramp * m_volume;
+		m_wave[i] = short(output);
+	}
 }

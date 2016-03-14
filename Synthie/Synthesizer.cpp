@@ -93,7 +93,8 @@ bool CSynthesizer::Generate(double * frame)
 		}
 		else if (note->Instrument() == L"PianoInstrument")
 		{
-			instrument = new CPianoInstrument();
+			m_pianoInstrumentFactory.SetNote(note);
+			instrument = m_pianoInstrumentFactory.CreateInstrument();
 		}
 		else if (note->Instrument() == L"Chorus")
 		{

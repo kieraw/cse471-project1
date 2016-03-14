@@ -126,6 +126,12 @@
     <ClCompile Include="ReverberationEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PianoInstrument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PianoInstrumentFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio\DirSound.h">
@@ -246,6 +252,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ReverberationEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PianoInstrument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PianoInstrumentFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,6 +16,8 @@
 #include "FlangeEffect.h"
 #include "ReverberationEffect.h"
 #include "NoiseGateEffect.h"
+#include "PianoInstrument.h"
+#include "PianoInstrumentFactory.h"
 
 using namespace std;
 
@@ -68,6 +70,7 @@ private:
 	int m_measure;              //!< The current measure
 	double m_beat;              //!< The current beat within the measure
 	CWaveInstrumentFactory m_waveinstfactory;
+	CPianoInstrumentFactory m_pianoInstrumentFactory;
 
 private:
 	void XmlLoadScore(IXMLDOMNode * xml);

@@ -14,6 +14,7 @@ public:
 	bool LoadFile(const char *filename);
 	void ChangePitch(double rate);
 	void CrossFade(const char *filename);
+	void ChangeDuration();
 	void CWaveInstrumentFactory::Envelope();
 
 	void SetFade(double fade) { m_fade = fade; }

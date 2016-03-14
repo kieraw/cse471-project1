@@ -93,6 +93,7 @@ void CWaveInstrumentFactory::SetNote(CNote *note)
 		}
 	}
 
+	ChangeDuration();
 	Envelope();
 }
 
@@ -209,6 +210,34 @@ void CWaveInstrumentFactory::CrossFade(const char *filename)
 	m_wave = o_wave;
 }
 
+void CWaveInstrumentFactory::ChangeDuration()
+{
+	vector<short> o_wave;
+	double m_time = 0.0;
+	double length = m_wave.size() / 44100.;
+	int i = 0;
+
+	if (m_duration == 0)
+	{
+		return;
+	}
+
+	while (m_time < m_duration)
+	{
+		o_wave.push_back(m_wave[i]);
+
+		i++;
+		m_time += 1 / 44100.;
+
+		if (i > m_wave.size() - 1)
+		{
+			i = 0;
+		}
+	}
+	
+	m_wave = o_wave;
+}
+
 void CWaveInstrumentFactory::Envelope()
 {
 	double output;
@@ -216,7 +245,7 @@ void CWaveInstrumentFactory::Envelope()
 	double m_time = 0.0;
 	double m_duration = m_wave.size() / 44100.;
 
-	for (int i = 0; i < m_wave.size(); i++, m_time += 1 / 44100)
+	for (int i = 0; i < m_wave.size(); i++, m_time += 1 / 44100.)
 	{
 		if (m_time < m_attack)
 		{

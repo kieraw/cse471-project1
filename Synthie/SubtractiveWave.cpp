@@ -77,7 +77,6 @@ void CSubtractiveWave::SetWavetables()
 
 		//Implement Filter envelope***
 
-
 		m_wavetable[i] = sample;
 
 
@@ -106,5 +105,6 @@ void CSubtractiveWave::ImplementReson(double* sample, int tableIndex){
 		secondPrevIndex = tableIndex - 2;
 
 	*sample = A * *sample + (2 * R*cosTheta) * m_wavetable[prevIndex] - pow(R, 2) * m_wavetable[secondPrevIndex];
+
 
 }

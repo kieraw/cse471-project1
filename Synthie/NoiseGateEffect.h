@@ -1,5 +1,7 @@
 #pragma once
 #include "AudioEffect.h"
+#include "CAR.h"
+
 class CNoiseGateEffect :
 	public CAudioEffect
 {
@@ -16,5 +18,6 @@ public:
 private:
 	double mGateL;
 	double mGateR;
+
 };
 

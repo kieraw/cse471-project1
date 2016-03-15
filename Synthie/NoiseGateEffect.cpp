@@ -25,7 +25,7 @@ void CNoiseGateEffect::Process(double* input, double* output)
 		if (mGateL > 1)
 			mGateL = 1;
 	}
-	output[0] = mDry * input[0] + (mWet * input[0] * mGateL);
+	output[0] = (mDry * input[0]) + (mWet * input[0] * mGateL);
 
 	if (input[1] < mThreshold && input[1] > -mThreshold)
 	{
@@ -39,7 +39,7 @@ void CNoiseGateEffect::Process(double* input, double* output)
 		if (mGateR > 1)
 			mGateR = 1;
 	}
-	output[1] = mDry * input[1] + (mWet * input[1] * mGateR);
+	output[1] = (mDry * input[1]) + (mWet * input[1] * mGateR);
 
 
 }

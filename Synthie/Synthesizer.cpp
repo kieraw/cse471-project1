@@ -188,6 +188,7 @@ bool CSynthesizer::Generate(double * frame)
 				if (sends[i])
 				{
 					instrument->SetSend(i+1, 1 + i * .5);
+					instrument->SetSend(0, 0);
 				}
 			}
 
@@ -228,15 +229,15 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			mChorusEffect.Process(channelframes[1], chorusframes);
 		}
-		else if (channelframes[2][0] != 0)
+		if (channelframes[2][0] != 0)
 		{
 			mFlangeEffect.Process(channelframes[2], flangeframes);
 		}
-		else if (channelframes[3][0] != 0)
+		if (channelframes[3][0] != 0)
 		{
 			mReverbEffect.Process(channelframes[3], reverbframes);
 		}
-		else if (channelframes[4][0] != 0)
+		if (channelframes[4][0] != 0)
 		{
 			mNoiseGateEffect.Process(channelframes[4], noisegateframes);
 		}
@@ -244,10 +245,10 @@ bool CSynthesizer::Generate(double * frame)
 		for (int i = 0; i < GetNumChannels(); i++)
 		{
 			frame[i] += frames[i];
-			frame[i] += chorusframes[i];
+			//frame[i] += chorusframes[i];
 			frame[i] += flangeframes[i];
 			frame[i] += reverbframes[i];
-			frame[i] += noisegateframes[i];
+			//frame[i] += noisegateframes[i];
 		}
 
 

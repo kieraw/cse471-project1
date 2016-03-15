@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="60" beatspermeasure="4">
+	<instrument instrument="PianoInstrument">
+		<note measure="1" beat="1" duration="1" keydynamic="1" note="waves/piano/E6s.wav"/>
+		<note measure="1" beat="2" duration="1" note="waves/piano/D6s.wav"/>
+		<note measure="1" beat="3" duration="1" note="waves/piano/C6s.wav"/>
+		<note measure="1" beat="4" duration="1" note="waves/piano/D6s.wav"/>
+		<note measure="2" beat="1" duration="1" note="waves/piano/E6s.wav"/>
+		<note measure="2" beat="2" duration="1" note="waves/piano/E6s.wav"/>
+		<note measure="2" beat="3" duration="1" note="waves/piano/E6s.wav"/>
+		<note measure="2" beat="4" duration="1" note="waves/piano/D6s.wav"/>
+		<note measure="3" beat="1" duration="1" note="waves/piano/D6s.wav"/>
+		<note measure="3" beat="2" duration="1" note="waves/piano/D6s.wav"/>
+		<note measure="3" beat="3" duration="1" note="waves/piano/E6s.wav"/>
+		<note measure="3" beat="4" duration="1" note="waves/piano/G6s.wav"/>
+		<note measure="4" beat="1" duration="1" note="waves/piano/G6s.wav"/>
+	</instrument>
+</score>

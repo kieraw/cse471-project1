@@ -78,8 +78,6 @@ void CSubtractiveWave::SetWavetables()
 		//Implement Filter envelope***
 
 		m_wavetable[i] = sample;
-
-
 	}
 }
 //Implement the Reson Filter

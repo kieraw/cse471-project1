@@ -108,11 +108,11 @@ bool CSynthesizer::Generate(double * frame)
 			mFlangeEffect.SetNote(note);
 			mFlangeEffect.Start();
 		}
-		else if (note->Instrument() == L"Reverb")
+		else if (note->Instrument() == L"Compress")
 		{
 			sends[2] = true;
-			mReverbEffect.SetNote(note);
-			mReverbEffect.Start();
+			mCompressorEffect.SetNote(note);
+			mCompressorEffect.Start();
 		}
 		else if (note->Instrument() == L"NoiseGate")
 		{
@@ -219,10 +219,10 @@ bool CSynthesizer::Generate(double * frame)
 			frames[i] = channelframes[0][i];
 		}
 
-		double chorusframes[2], flangeframes[2], reverbframes[2], noisegateframes[2];
+		double chorusframes[2], flangeframes[2], compressframes[2], noisegateframes[2];
 		for (int i = 0; i < 2; i++)
 		{
-			chorusframes[i] = flangeframes[i] = reverbframes[i] = noisegateframes[i] = 0;
+			chorusframes[i] = flangeframes[i] = compressframes[i] = noisegateframes[i] = 0;
 		}
 		
 		if (channelframes[1][0] != 0)
@@ -235,7 +235,7 @@ bool CSynthesizer::Generate(double * frame)
 		}
 		if (channelframes[3][0] != 0)
 		{
-			mReverbEffect.Process(channelframes[3], reverbframes);
+			mCompressorEffect.Process(channelframes[3], compressframes);
 		}
 		if (channelframes[4][0] != 0)
 		{
@@ -246,8 +246,8 @@ bool CSynthesizer::Generate(double * frame)
 		{
 			frame[i] += frames[i];
 			//frame[i] += chorusframes[i];
-			frame[i] += flangeframes[i];
-			frame[i] += reverbframes[i];
+			//frame[i] += flangeframes[i];
+			frame[i] += compressframes[i];
 			//frame[i] += noisegateframes[i];
 		}
 

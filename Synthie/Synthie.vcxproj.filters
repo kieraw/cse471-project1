@@ -123,13 +123,13 @@
     <ClCompile Include="NoiseGateEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReverberationEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PianoInstrument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PianoInstrumentFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CompressorEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,13 +251,13 @@
     <ClInclude Include="NoiseGateEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReverberationEffect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PianoInstrument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PianoInstrumentFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CompressorEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

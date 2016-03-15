@@ -14,7 +14,7 @@
 #include "WaveInstrumentFactory.h"
 #include "ChorusEffect.h"
 #include "FlangeEffect.h"
-#include "ReverberationEffect.h"
+#include "CompressorEffect.h"
 #include "NoiseGateEffect.h"
 #include "PianoInstrument.h"
 #include "PianoInstrumentFactory.h"
@@ -81,7 +81,7 @@ private:
 	//! Effects
 	CChorusEffect mChorusEffect;
 	CFlangeEffect mFlangeEffect;
-	CReverberationEffect mReverbEffect;
+	CCompressorEffect mCompressorEffect;
 	CNoiseGateEffect mNoiseGateEffect;
 	
 };

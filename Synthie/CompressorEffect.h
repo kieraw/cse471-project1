@@ -1,11 +1,11 @@
 #pragma once
 #include "AudioEffect.h"
-class CReverberationEffect :
+class CCompressorEffect :
 	public CAudioEffect
 {
 public:
-	CReverberationEffect();
-	virtual ~CReverberationEffect();
+	CCompressorEffect();
+	virtual ~CCompressorEffect();
 
 	virtual void Process(double *input, double *output) override;
 

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<score bpm="60" beatspermeasure="4">
+     <instrument instrument="AdditiveInstrument">
+          <note measure="1" beat="1" duration="4" harmonics="1" vibrato="12" vibratoRate="8" crossfade="1" crossfadeOverlap="0" note="E4"/>
+          <note measure="2" beat="1" duration="4" harmonics="1 .3 .5" vibrato="5" vibratoRate="6" crossfade="1" crossfadeOverlap="2" />
+          <note measure="2" beat="3" duration="2" harmonics="1" note="G4" />
+	  <note measure="3" beat="1" duration="2" harmonics="1 .5 .7" note="D4" />
+     </instrument>
+     <instrument instrument="PianoInstrument">
+	<note measure="4" beat="1" duration="1" keydynamic="1" note="waves/piano/E6s.wav"/>
+	<note measure="4" beat="2" duration="1" note="waves/piano/D6s.wav"/>
+	<note measure="4" beat="7" duration="1" note="waves/piano/E6s.wav"/>
+	<note measure="5" beat="1" duration="1" keydynamic="2" note="waves/piano/A2s.wav"/>
+	<note measure="5" beat="2" duration="1" keydynamic="1" note="waves/piano/A2s.wav"/>
+	<note measure="5" beat="3" duration="1" keydynamic=".5" note="waves/piano/A2s.wav"/>
+	</instrument>
+	<instrument instrument="Wave">
+		<note measure="6" duration="1" file="waves/drumriff.wav" pitch="1.0"/> 
+		<note measure="7" duration="15" file="waves/drumriff.wav" pitch="1.0"/> 
+		<note measure="12" duration="0" file="waves/drumriff.wav" pitch="2.0"/> 
+		<note measure="13" duration="0" file="waves/drumriff.wav" pitch="0.5"/> 
+		<note measure="17" duration="0" file="waves/drumriff.wav" pitch="1.0" fade="0.5" crossfade="waves/samplewave.wav"/> 
+	</instrument>
+</score>

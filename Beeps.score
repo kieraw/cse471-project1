@@ -26,7 +26,7 @@
         <note measure="4" beat="1" delay=".0025" wet=".7" dry=".1" />
         <note measure="4" beat="2" delay=".0025" wet=".7" dry=".1" />
       </instrument>
-      <instrument instrument="Flange">
+      <instrument instrument="Reverb">
         <note measure="3" beat="1" delay=".0025" wet=".7" dry=".3" />
         <note measure="3" beat="2" delay=".0025" wet=".7" dry=".1" />
         <note measure="4" beat="1" delay=".0025" wet=".7" dry=".1" />

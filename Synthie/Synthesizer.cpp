@@ -93,7 +93,8 @@ bool CSynthesizer::Generate(double * frame)
 		}
 		else if (note->Instrument() == L"PianoInstrument")
 		{
-			instrument = new CPianoInstrument();
+			m_pianoInstrumentFactory.SetNote(note);
+			instrument = m_pianoInstrumentFactory.CreateInstrument();
 		}
 		else if (note->Instrument() == L"Chorus")
 		{
@@ -107,11 +108,11 @@ bool CSynthesizer::Generate(double * frame)
 			mFlangeEffect.SetNote(note);
 			mFlangeEffect.Start();
 		}
-		else if (note->Instrument() == L"Reverb")
+		else if (note->Instrument() == L"Compress")
 		{
 			sends[2] = true;
-			mReverbEffect.SetNote(note);
-			mReverbEffect.Start();
+			mCompressorEffect.SetNote(note);
+			mCompressorEffect.Start();
 		}
 		else if (note->Instrument() == L"NoiseGate")
 		{
@@ -187,6 +188,7 @@ bool CSynthesizer::Generate(double * frame)
 				if (sends[i])
 				{
 					instrument->SetSend(i+1, 1 + i * .5);
+					instrument->SetSend(0, 0);
 				}
 			}
 
@@ -217,36 +219,36 @@ bool CSynthesizer::Generate(double * frame)
 			frames[i] = channelframes[0][i];
 		}
 
-		double chorusframes[2], flangeframes[2], reverbframes[2], noisegateframes[2];
+		double chorusframes[2], flangeframes[2], compressframes[2], noisegateframes[2];
 		for (int i = 0; i < 2; i++)
 		{
-			chorusframes[i] = flangeframes[i] = reverbframes[i] = noisegateframes[i] = 0;
+			chorusframes[i] = flangeframes[i] = compressframes[i] = noisegateframes[i] = 0;
 		}
 		
 		if (channelframes[1][0] != 0)
 		{
-			mChorusEffect.Process(channelframes[1], chorusframes, m_time);
+			mChorusEffect.Process(channelframes[1], chorusframes);
 		}
-		else if (channelframes[2][0] != 0)
+		if (channelframes[2][0] != 0)
 		{
-			mFlangeEffect.Process(channelframes[2], flangeframes, m_time);
+			mFlangeEffect.Process(channelframes[2], flangeframes);
 		}
-		else if (channelframes[3][0] != 0)
+		if (channelframes[3][0] != 0)
 		{
-			mReverbEffect.Process(channelframes[3], reverbframes, m_time);
+			mCompressorEffect.Process(channelframes[3], compressframes);
 		}
-		else if (channelframes[4][0] != 0)
+		if (channelframes[4][0] != 0)
 		{
-			mNoiseGateEffect.Process(channelframes[4], noisegateframes, m_time);
+			mNoiseGateEffect.Process(channelframes[4], noisegateframes);
 		}
 
 		for (int i = 0; i < GetNumChannels(); i++)
 		{
 			frame[i] += frames[i];
-			frame[i] += chorusframes[i];
-			frame[i] += flangeframes[i];
-			frame[i] += reverbframes[i];
-			frame[i] += noisegateframes[i];
+			//frame[i] += chorusframes[i];
+			//frame[i] += flangeframes[i];
+			frame[i] += compressframes[i];
+			//frame[i] += noisegateframes[i];
 		}
 
 

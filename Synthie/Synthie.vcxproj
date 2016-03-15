@@ -137,6 +137,7 @@
     <ClCompile Include="audio\DirSoundStream.cpp" />
     <ClCompile Include="CAR.cpp" />
     <ClCompile Include="ChorusEffect.cpp" />
+    <ClCompile Include="CompressorEffect.cpp" />
     <ClCompile Include="Envelope.cpp" />
     <ClCompile Include="AudioFilter.cpp" />
     <ClCompile Include="FlangeEffect.cpp" />
@@ -146,9 +147,9 @@
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="Notes.cpp" />
     <ClCompile Include="PianoInstrument.cpp" />
+    <ClCompile Include="PianoInstrumentFactory.cpp" />
     <ClCompile Include="Progress.cpp" />
     <ClCompile Include="ProgressDlg.cpp" />
-    <ClCompile Include="ReverberationEffect.cpp" />
     <ClCompile Include="SampleWave.cpp" />
     <ClCompile Include="SineWave.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -180,6 +181,7 @@
     <ClInclude Include="audio\DirSoundStream.h" />
     <ClInclude Include="CAR.h" />
     <ClInclude Include="ChorusEffect.h" />
+    <ClInclude Include="CompressorEffect.h" />
     <ClInclude Include="Envelope.h" />
     <ClInclude Include="AudioFilter.h" />
     <ClInclude Include="FlangeEffect.h" />
@@ -189,10 +191,10 @@
     <ClInclude Include="Note.h" />
     <ClInclude Include="Notes.h" />
     <ClInclude Include="PianoInstrument.h" />
+    <ClInclude Include="PianoInstrumentFactory.h" />
     <ClInclude Include="Progress.h" />
     <ClInclude Include="ProgressDlg.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="ReverberationEffect.h" />
     <ClInclude Include="SampleWave.h" />
     <ClInclude Include="SineWave.h" />
     <ClInclude Include="stdafx.h" />

@@ -10,6 +10,7 @@ CPianoInstrument::CPianoInstrument()
 	m_volume = 1.0;
 	m_duration = 1.0;
 	m_pedal = false;
+	m_advDynamic = false;
 }
 
 
@@ -58,16 +59,23 @@ void CPianoInstrument::SetNote(CNote *note)
 			char filename[100];
 			wcstombs(filename, value.bstrVal, 100);
 			LoadFile(filename);
+
+			if (m_advDynamic){
+				InterpolateLoud(m_loudFileName);
+			}
 		}
-		else if (name == "duration")
+		else if (name == "advkeydynamic")
 		{
-			value.ChangeType(VT_R8);
-			//Set the duration of the note to be the input duration plus the ramp down time after 
-			//the note has been released
-			SetDuration(value.dblVal + m_release);
+			value.ChangeType(VT_BSTR);
+			char filename[100];
+			wcstombs(filename, value.bstrVal, 100);
+			InterpolateLoud(filename);
 		}
 		
 	}
+
+	//Set the duration to include the time it takes for a note to "dampen" out after releasing the key
+	m_duration += m_release;
 
 	if (!m_pedal){
 		ChangeDuration();
@@ -81,8 +89,6 @@ void CPianoInstrument::SetNote(CNote *note)
 /* Load the file and create the initial wave table of the note */
 bool CPianoInstrument::LoadFile(const char *filename)
 {
-	m_wave.clear();
-
 	CDirSoundSource m_file;
 
 	if (!m_file.Open(filename))
@@ -108,6 +114,33 @@ bool CPianoInstrument::LoadFile(const char *filename)
 		m_pedalWave.clear();
 	}
 	
+	m_file.Close();
+	return true;
+}
+
+/* Load the loud file and create the initial wave table of the note */
+bool CPianoInstrument::InterpolateLoud(const char *filename)
+{
+
+	CDirSoundSource m_file;
+
+	if (!m_file.Open(filename))
+	{
+		CString msg = L"Unable to open audio file: ";
+		msg += filename;
+		AfxMessageBox(msg);
+		return false;
+	}
+
+	int sampleFrames = m_wave.size();
+
+	for (int i = 0; i<sampleFrames; i++)
+	{
+		short frame[2];
+		m_file.ReadFrame(frame);
+		m_wave[i] = (m_wave[i] + frame[0]) / 2.0;
+	}
+
 	m_file.Close();
 	return true;
 }

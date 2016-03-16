@@ -118,7 +118,7 @@ bool CPianoInstrument::LoadFile(const char *filename)
 	return true;
 }
 
-/* Load the loud file and create the initial wave table of the note */
+/* Load the loud file and interpolate with the initial wave table of the note */
 bool CPianoInstrument::InterpolateLoud(const char *filename)
 {
 
@@ -134,11 +134,17 @@ bool CPianoInstrument::InterpolateLoud(const char *filename)
 
 	int sampleFrames = m_wave.size();
 
-	for (int i = 0; i<sampleFrames; i++)
+	//Interpolate and load back into the wave
+	for (int i = 0; i<m_file.NumSampleFrames(); i++)
 	{
-		short frame[2];
-		m_file.ReadFrame(frame);
-		m_wave[i] = (m_wave[i] + frame[0]) / 2.0;
+		if (i < m_wave.size()){
+			short frame[2];
+			m_file.ReadFrame(frame);
+			short test = frame[0] / 2.0;
+			m_wave[i] = (m_wave[i] + frame[0]) / 1.5;
+		}
+		else
+			break;
 	}
 
 	m_file.Close();

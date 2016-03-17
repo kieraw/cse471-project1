@@ -83,6 +83,21 @@ void CSubtractiveInstrument::SetNote(CNote *note)
 			value.ChangeType(VT_R8);
 			mSubtractiveWave.SetResonBandwidth(value.dblVal);
 		}
+		else if (name == "sweep")
+		{
+			if ((wstring)value.bstrVal == L"up"){
+				mSubtractiveWave.SetMoogSweepUp(true);
+			}
+			else if ((wstring)value.bstrVal == L"down"){
+				mSubtractiveWave.SetMoogSweepDown(true);
+			}
+			else if ((wstring)value.bstrVal == L"up-down"){
+				mSubtractiveWave.SetMoogSweepUpDown(true);
+			}
+			else if ((wstring)value.bstrVal == L"down-up"){
+				mSubtractiveWave.SetMoogSweepDownUp(true);
+			}
+		}
 	}
 	
 }

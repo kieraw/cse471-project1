@@ -16,5 +16,7 @@ private:
 	bool m_pedal;
 	bool m_playPedalUp;
 	bool m_playPedalDown;
+	bool m_advancedDynamic;
+	char* m_loudFileName;
 };
 

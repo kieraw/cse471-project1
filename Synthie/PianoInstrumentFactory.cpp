@@ -10,6 +10,7 @@ CPianoInstrumentFactory::CPianoInstrumentFactory()
 	m_pedal = false;
 	m_playPedalDown = false;
 	m_playPedalUp = false;
+	m_advancedDynamic = false;
 }
 
 
@@ -34,6 +35,10 @@ CPianoInstrument *CPianoInstrumentFactory::CreateInstrument()
 		instrument->PlayPedalUp();
 		m_playPedalUp = false;
 	}
+	//if (m_advancedDynamic){
+	//	instrument->SetAdvDynamic(m_loudFileName, m_advancedDynamic);
+	//	m_advancedDynamic = false;
+	//}
 
 	return instrument;
 }
@@ -88,6 +93,17 @@ void CPianoInstrumentFactory::SetNote(CNote *note)
 			value.ChangeType(VT_R8);
 			m_volume = value.dblVal;
 		}
+		/*else if (name == "advkeydynamic")
+		{
+			m_advancedDynamic = true;
+			value.ChangeType(VT_BSTR);
+			char filename[100];
+			auto testing = value.bstrVal;
+			wcstombs(filename, value.bstrVal, 100);
+			m_loudFileName = filename;
+			int test = 0;
+			test++;
+		}*/
 
 	}
 

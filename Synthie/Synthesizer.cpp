@@ -245,10 +245,10 @@ bool CSynthesizer::Generate(double * frame)
 		for (int i = 0; i < GetNumChannels(); i++)
 		{
 			frame[i] += frames[i];
-			//frame[i] += chorusframes[i];
-			//frame[i] += flangeframes[i];
+			frame[i] += chorusframes[i];
+			frame[i] += flangeframes[i];
 			frame[i] += compressframes[i];
-			//frame[i] += noisegateframes[i];
+			frame[i] += noisegateframes[i];
 		}
 
 

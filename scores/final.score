@@ -183,7 +183,7 @@
 		<note measure="15" beat="2.5" duration="0" file="waves/danger-zone-talk.wav" pitch="1.0" fade="6.0" crossfade="waves/danger-zone-short.wav" attack="0.5" release="2.0" />
 	</instrument>
 
-	<-- Effects -->
+	<!-- Effects -->
 
 	<instrument instrument="Chorus">
 		<note measure="1" delay=".0025" wet=".8" dry=".2" />

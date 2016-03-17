@@ -183,9 +183,22 @@
 		<note measure="15" beat="2.5" duration="0" file="waves/danger-zone-talk.wav" pitch="1.0" fade="6.0" crossfade="waves/danger-zone-short.wav" attack="0.5" release="2.0" />
 	</instrument>
 
+	<-- Effects -->
+
 	<instrument instrument="Chorus">
-		<note measure="6" beat="4" delay=".0025" wet=".8" dry=".2" />
-		<note measure="7" beat="1" delay=".0025" wet=".8" dry=".2" />
+		<note measure="1" delay=".0025" wet=".8" dry=".2" />
+		<note measure="2" beat="1" delay=".0025" wet=".8" dry=".2" />
 	</instrument>
 	
+	<instrument instrument="NoiseGate">
+	    <note measure="8" delay=".0025" wet=".5" dry=".5" threshold=".1" />
+  	</instrument>
+  <instrument instrument="Flange">
+    <note measure="9" delay=".0025" wet=".25" dry=".75" />
+  </instrument>
+  <instrument instrument="Compress">
+    <note measure="10" beat=".5" delay=".0025" wet=".4" dry=".6" threshold=".005" />
+    <note measure="10" beat="2.75" delay=".0025" wet=".4" dry=".6" threshold=".005" />
+    <note measure="10" beat="3" delay=".0025" wet=".4" dry=".6" threshold=".005" />
+  </instrument>
 </score>

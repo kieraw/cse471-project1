@@ -160,9 +160,9 @@
 	
 	<instrument instrument="SubtractiveInstrument">
         <note measure="3" beat="1" duration="2" note="G6" wavetype="Sawtooth" resonFreq="0.035" bandwidth="0.4"/>
-		<note measure="3" beat="2" duration="2" note="C6" wavetype="Sawtooth" resonFreq="0.025" bandwidth="0.85"/>
-		<note measure="3" beat="3" duration="2" note="F5" wavetype="Sawtooth" resonFreq="0.01134" bandwidth="1.0"/>
-		<note measure="3" beat="4" duration="3" note="Bb2" wavetype="Triangle" resonFreq="0.01134" bandwidth="0.75"/>
+		<note measure="3" beat="2" duration="2" note="C6" wavetype="Sawtooth" resonFreq="0.025" bandwidth="0.85" sweep="down-up"/>
+		<note measure="3" beat="3" duration="2" note="F5" wavetype="Sawtooth" resonFreq="0.01134" bandwidth="1.0" sweep="up-down"/>
+		<note measure="3" beat="4" duration="3" note="Bb2" wavetype="Triangle" resonFreq="0.01134" bandwidth="0.75" sweep="down"/>
 		
 
 	</instrument> 

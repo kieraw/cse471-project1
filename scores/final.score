@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <score bpm="60" beatspermeasure="4">
 	<instrument instrument="PianoInstrument">
 		<note measure="1" beat="1" duration="1" keydynamic="1" note="waves/piano/E6s.wav"/>
@@ -189,8 +189,8 @@
 	</instrument> 
 	
 	<instrument instrument="AdditiveInstrument">
-		<note measure="3" beat="3" duration="4" harmonics="1" vibrato="12" vibratoRate="12" note="A3"/>
-		<note measure="3" beat="3.5" duration="4" harmonics="1 .3 .5" vibrato="12" vibratoRate="8" note="A3"/>
+		<note measure="3" beat="3" duration="4" harmonics="1" vibrato="12" vibratoRate="12" crossfade="1" crossfadeOverlap="0" note="A3"/>
+		<note measure="3" beat="3.5" duration="4" harmonics="1 .3 .5" vibrato="12" vibratoRate="8" crossfade="1" crossfadeOverlap="2"/>
 		<note measure="3" beat="4" duration="2" harmonics="1" vibrato="12" vibratoRate="4" note="Bb2" />
 	</instrument>
 	
